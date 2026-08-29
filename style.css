@@ -1,9 +1,14 @@
 :root {
   --bg: #ffffff;
-  --fg: #111111;
+  --bg-alt: #faf7f2;
+  --fg: #1f2933;
   --muted: #6b7280;
-  --border: #e6e6e6;
+  --border: #e7e2da;
+  --accent: #c2410c;
+  --accent-dark: #9a3412;
+  --accent-soft: #fdece1;
   --code-bg: #f5f5f5;
+  --radius: 10px;
   --serif: "Fraunces", Georgia, serif;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
     "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
@@ -34,6 +39,11 @@ code {
   font-size: 0.9em;
 }
 
+.accent-bar {
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), #f59e0b);
+}
+
 /* header */
 
 .site-header {
@@ -44,14 +54,14 @@ code {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 24px max(24px, 6vw);
+  padding: 22px max(24px, 6vw);
   border-bottom: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(8px);
 }
 
 .logo {
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.01em;
 }
 
@@ -67,6 +77,7 @@ code {
   position: relative;
   color: var(--muted);
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .site-header nav a::after {
@@ -75,8 +86,8 @@ code {
   left: 0;
   right: 0;
   bottom: -4px;
-  height: 1px;
-  background: var(--fg);
+  height: 2px;
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.2s ease;
@@ -94,22 +105,30 @@ code {
 /* hero */
 
 .hero {
-  max-width: 720px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 120px 24px 88px;
+  padding: 100px 24px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.hero-text {
+  max-width: 540px;
 }
 
 .eyebrow {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 500;
-  color: var(--muted);
+  color: var(--accent-dark);
   margin: 0 0 18px;
 }
 
 .hero h1 {
   font-size: clamp(2rem, 4.5vw, 2.85rem);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.4;
   margin: 0 0 20px;
@@ -118,57 +137,97 @@ code {
 .hero .lead {
   color: var(--muted);
   font-size: 1.05rem;
-  max-width: 480px;
   margin: 0 0 36px;
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #f59e0b);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 3.2rem;
+  box-shadow: 0 16px 32px -12px rgba(194, 65, 12, 0.45);
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 28px;
-  border: 1px solid var(--fg);
-  border-radius: 3px;
+  padding: 14px 30px;
+  border-radius: 8px;
   font-size: 0.9rem;
-  font-weight: 500;
-  transition: background 0.2s ease, color 0.2s ease;
+  font-weight: 600;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 8px 20px -8px rgba(194, 65, 12, 0.55);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
 .btn:hover {
-  background: var(--fg);
-  color: #fff;
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -8px rgba(154, 52, 18, 0.55);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--fg);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+.btn-ghost:hover {
+  background: var(--bg-alt);
+  color: var(--fg);
+  transform: none;
+  box-shadow: none;
 }
 
 /* sections */
 
 main {
-  max-width: 720px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 0 24px 40px;
+  padding: 0 24px;
 }
 
 .section {
-  padding: 60px 0;
+  padding: 72px 0;
   border-top: 1px solid var(--border);
+}
+
+.section-alt {
+  margin: 0 -24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  background: var(--bg-alt);
 }
 
 .section-head {
   display: flex;
   align-items: baseline;
   gap: 16px;
-  margin-bottom: 26px;
+  margin-bottom: 28px;
 }
 
 .index {
   font-family: var(--serif);
   font-style: italic;
-  color: var(--muted);
-  font-size: 0.95rem;
+  color: var(--accent);
+  font-size: 1.1rem;
 }
 
 .section h2 {
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 1.4rem;
+  font-weight: 700;
   margin: 0;
 }
 
@@ -177,48 +236,72 @@ main {
   max-width: 560px;
 }
 
-/* project list */
-
-.project-list {
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   list-style: none;
-  margin: 0;
+  margin: 28px 0 0;
   padding: 0;
 }
 
-.project-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-  padding: 24px 0;
-  border-top: 1px solid var(--border);
+.tags li {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
 }
 
-.project-item:first-child {
-  border-top: none;
-  padding-top: 0;
+/* project cards */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
 }
 
-.project-item h3 {
-  margin: 0 0 4px;
+.card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: 0 1px 2px rgba(31, 41, 51, 0.04);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 32px -16px rgba(31, 41, 51, 0.18);
+  border-color: #ddd6c8;
+}
+
+.card h3 {
+  margin: 0 0 8px;
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.project-item p {
-  margin: 0;
+.card p {
+  margin: 0 0 18px;
   color: var(--muted);
   font-size: 0.92rem;
 }
 
-.project-item > a {
-  flex-shrink: 0;
+.card a {
   font-size: 0.9rem;
-  border-bottom: 1px solid transparent;
+  font-weight: 600;
+  color: var(--accent-dark);
 }
 
-.project-item > a:hover {
-  border-color: var(--fg);
+.card a span {
+  display: inline-block;
+  transition: transform 0.18s ease;
+}
+
+.card a:hover span {
+  transform: translateX(4px);
 }
 
 /* footer */
@@ -231,10 +314,20 @@ footer {
   font-size: 0.85rem;
 }
 
-@media (max-width: 560px) {
-  .project-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+@media (max-width: 640px) {
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding-top: 64px;
+  }
+
+  .hero-text {
+    max-width: none;
+  }
+
+  .avatar {
+    width: 96px;
+    height: 96px;
+    font-size: 2.2rem;
   }
 }
