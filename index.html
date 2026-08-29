@@ -4,64 +4,84 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>sho29saka31 | ポートフォリオ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="hero">
+<header class="site-header">
+  <span class="logo">sho29saka31</span>
   <nav>
-    <span class="logo">sho29saka31</span>
     <ul>
       <li><a href="#about">自己紹介</a></li>
       <li><a href="#projects">プロジェクト</a></li>
       <li><a href="#contact">お問い合わせ</a></li>
     </ul>
   </nav>
-  <div class="hero-content">
-    <h1>こんにちは、sho29saka31です 👋</h1>
-    <p>コミットを積み重ねながらものづくりをしているソフトウェアエンジニアです。</p>
-    <a class="btn" href="https://github.com/sho29saka31" target="_blank" rel="noopener">GitHubプロフィールを見る</a>
-  </div>
 </header>
 
+<section class="hero">
+  <p class="eyebrow">Portfolio</p>
+  <h1>ソフトウェアエンジニア、<br>sho29saka31 です。</h1>
+  <p class="lead">コミットを積み重ねながら、ものづくりをしています。</p>
+  <a class="btn" href="https://github.com/sho29saka31" target="_blank" rel="noopener">GitHub プロフィールを見る</a>
+</section>
+
 <main>
-  <section id="about">
-    <h2>自己紹介</h2>
+  <section id="about" class="section">
+    <div class="section-head">
+      <span class="index">01</span>
+      <h2>自己紹介</h2>
+    </div>
     <p>
-      このサイトへようこそ。このページはこのリポジトリから直接 GitHub Pages でホストされています。
-      <code>index.html</code> と <code>style.css</code> を編集して、自分だけのサイトにカスタマイズしてください。
+      このサイトは GitHub Pages でホストしている個人サイトです。
+      <code>index.html</code> と <code>style.css</code> を編集して、内容を自由にカスタマイズできます。
     </p>
   </section>
 
-  <section id="projects">
-    <h2>プロジェクト</h2>
-    <div class="cards">
-      <article class="card">
-        <h3>プロジェクト1</h3>
-        <p>ここにプロジェクトの簡単な説明を書きます。</p>
-        <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">GitHubで見る →</a>
-      </article>
-      <article class="card">
-        <h3>プロジェクト2</h3>
-        <p>ここに別のプロジェクトの簡単な説明を書きます。</p>
-        <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">GitHubで見る →</a>
-      </article>
-      <article class="card">
-        <h3>プロジェクト3</h3>
-        <p>ここに別のプロジェクトの簡単な説明を書きます。</p>
-        <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">GitHubで見る →</a>
-      </article>
+  <section id="projects" class="section">
+    <div class="section-head">
+      <span class="index">02</span>
+      <h2>プロジェクト</h2>
     </div>
+    <ul class="project-list">
+      <li class="project-item">
+        <div>
+          <h3>プロジェクト1</h3>
+          <p>ここにプロジェクトの簡単な説明を書きます。</p>
+        </div>
+        <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">見る →</a>
+      </li>
+      <li class="project-item">
+        <div>
+          <h3>プロジェクト2</h3>
+          <p>ここに別のプロジェクトの簡単な説明を書きます。</p>
+        </div>
+        <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">見る →</a>
+      </li>
+      <li class="project-item">
+        <div>
+          <h3>プロジェクト3</h3>
+          <p>ここに別のプロジェクトの簡単な説明を書きます。</p>
+        </div>
+        <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">見る →</a>
+      </li>
+    </ul>
   </section>
 
-  <section id="contact">
-    <h2>お問い合わせ</h2>
-    <p>ご連絡は <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">GitHubプロフィール</a> からお気軽にどうぞ。</p>
+  <section id="contact" class="section">
+    <div class="section-head">
+      <span class="index">03</span>
+      <h2>お問い合わせ</h2>
+    </div>
+    <p>ご連絡は <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">GitHub プロフィール</a> からお気軽にどうぞ。</p>
   </section>
 </main>
 
 <footer>
-  <p>&copy; <span id="year"></span> sho29saka31. Built with GitHub Pages.</p>
+  <p>&copy; <span id="year"></span> sho29saka31</p>
 </footer>
 
 <script>
