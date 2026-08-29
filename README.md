@@ -1,9 +1,9 @@
 # sho29saka31.github.io
 
-Personal site hosted with [GitHub Pages](https://pages.github.com/), served directly from this
-repository's `main` branch.
+[GitHub Pages](https://pages.github.com/) でホストしている個人サイトです。このリポジトリの
+`main` ブランチから直接配信されます。
 
-- `index.html` / `style.css` — the site itself
-- Live at: https://sho29saka31.github.io
+- `index.html` / `style.css` — サイト本体
+- 公開URL: https://sho29saka31.github.io
 
-Edit `index.html` and `style.css` to customize the content, then push to `main` to publish.
+`index.html` と `style.css` を編集して内容をカスタマイズし、`main` にpushすると公開されます。
