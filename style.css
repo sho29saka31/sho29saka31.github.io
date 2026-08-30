@@ -232,32 +232,11 @@ main {
 
 /* tools */
 
-.tools-body {
+.tools-icons {
   display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.tools-row {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  align-items: center;
-  gap: 24px;
-}
-
-.tools-row dt {
+  flex-wrap: wrap;
+  gap: 16px;
   margin: 0;
-  font-weight: 600;
-  color: var(--muted);
-  font-size: clamp(1rem, 2.2vw, 1.15rem);
-  border-right: 1px solid var(--border);
-  padding-right: 24px;
-}
-
-.tools-row dd {
-  margin: 0;
-  font-size: clamp(1.15rem, 2.6vw, 1.5rem);
-  font-weight: 600;
 }
 
 /* product carousel */
@@ -309,9 +288,14 @@ main {
 
 .project-thumb {
   aspect-ratio: 1 / 1;
-  background: #fff;
+  background: #fff center / cover no-repeat;
   border-radius: 10px;
   margin-bottom: 20px;
+}
+
+.project-loading {
+  color: var(--muted);
+  padding: 24px 0;
 }
 
 .project-name {
@@ -400,10 +384,5 @@ footer a {
     padding-bottom: 16px;
     border-bottom: 1px solid var(--border);
     margin-bottom: 4px;
-  }
-
-  .tools-row {
-    grid-template-columns: 90px 1fr;
-    gap: 16px;
   }
 }
