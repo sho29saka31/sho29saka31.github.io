@@ -264,6 +264,12 @@ main {
   background: #ddd;
 }
 
+.carousel-viewport {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
 .carousel-track {
   display: flex;
   gap: 24px;
@@ -296,6 +302,60 @@ main {
 .project-loading {
   color: var(--muted);
   padding: 24px 0;
+}
+
+/* skeleton state */
+
+.skeleton-block {
+  background: linear-gradient(90deg, #e2e2e0 25%, #efefed 37%, #e2e2e0 63%);
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease infinite;
+  border-radius: 10px;
+}
+
+.skeleton-thumb {
+  aspect-ratio: 1 / 1;
+  margin-bottom: 20px;
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.skeleton-line-short {
+  width: 60%;
+  margin-bottom: 0;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.carousel-error {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background: rgba(244, 244, 244, 0.85);
+  backdrop-filter: blur(2px);
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.carousel-error[hidden] {
+  display: none;
 }
 
 .project-name {
