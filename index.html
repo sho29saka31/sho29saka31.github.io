@@ -49,20 +49,19 @@
       <h2>Tools</h2>
       <span class="section-label">利用する外部サービス</span>
     </div>
-    <dl class="tools-body">
-      <div class="tools-row">
-        <dt>UI / UX</dt>
-        <dd>Figma</dd>
-      </div>
-      <div class="tools-row">
-        <dt>DB</dt>
-        <dd>Supabase</dd>
-      </div>
-      <div class="tools-row">
-        <dt>AI</dt>
-        <dd>Claude</dd>
-      </div>
-    </dl>
+    <p class="tools-icons">
+      <img src="https://skillicons.dev/icons?i=windows&theme=dark" width="48" height="48" alt="Windows">
+      <img src="https://skillicons.dev/icons?i=git&theme=dark" width="48" height="48" alt="Git">
+      <img src="https://skillicons.dev/icons?i=github&theme=dark" width="48" height="48" alt="GitHub">
+      <img src="https://skillicons.dev/icons?i=githubactions&theme=dark" width="48" height="48" alt="GitHub Actions">
+      <img src="https://skillicons.dev/icons?i=figma&theme=dark" width="48" height="48" alt="Figma">
+      <img src="https://skillicons.dev/icons?i=supabase&theme=dark" width="48" height="48" alt="Supabase">
+      <img src="https://skillicons.dev/icons?i=firebase&theme=dark" width="48" height="48" alt="Firebase">
+      <img src="https://skillicons.dev/icons?i=vercel&theme=dark" width="48" height="48" alt="Vercel">
+      <img src="https://skillicons.dev/icons?i=sentry&theme=dark" width="48" height="48" alt="Sentry">
+      <img src="./assets/icons/claude.svg" width="48" height="48" alt="Claude">
+      <img src="./assets/icons/claude-code.svg" width="48" height="48" alt="Claude Code">
+    </p>
   </section>
 
   <section id="product" class="section section-alt">
@@ -75,24 +74,7 @@
       <button class="carousel-btn prev" id="prevBtn" aria-label="前の作品へ">&lsaquo;</button>
 
       <div class="carousel-track" id="carouselTrack">
-        <article class="project-card">
-          <div class="project-thumb" aria-hidden="true"></div>
-          <p class="project-name">{project_name}</p>
-          <p class="project-text">{project_text}</p>
-          <a class="project-link" href="#">詳細を見る<span>→</span></a>
-        </article>
-        <article class="project-card">
-          <div class="project-thumb" aria-hidden="true"></div>
-          <p class="project-name">{project_name}</p>
-          <p class="project-text">{project_text}</p>
-          <a class="project-link" href="#">詳細を見る<span>→</span></a>
-        </article>
-        <article class="project-card">
-          <div class="project-thumb" aria-hidden="true"></div>
-          <p class="project-name">{project_name}</p>
-          <p class="project-text">{project_text}</p>
-          <a class="project-link" href="#">詳細を見る<span>→</span></a>
-        </article>
+        <p class="project-loading">読み込み中…</p>
       </div>
 
       <button class="carousel-btn next" id="nextBtn" aria-label="次の作品へ">&rsaquo;</button>
@@ -134,23 +116,51 @@
   menuOverlay.addEventListener('click', closeMenu);
   slideMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
 
-  // carousel
+  // --- Product: fetch published repos from GitHub and render as slides ---
+  const GITHUB_USERNAME = 'sho29saka31';
+  const EXCLUDED_REPOS = new Set(['sho29saka31', 'sho29saka31.github.io', '.github']);
+
   const track = document.getElementById('carouselTrack');
-  const cards = Array.from(track.children);
   const dotsWrap = document.getElementById('carouselDots');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
-  cards.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'dot';
-    dot.setAttribute('aria-label', `${i + 1}枚目の作品を表示`);
-    dot.addEventListener('click', () => scrollToCard(i));
-    dotsWrap.appendChild(dot);
-  });
-  const dots = Array.from(dotsWrap.children);
+  let cards = [];
+  let dots = [];
+
+  function createProjectCard(repo) {
+    const article = document.createElement('article');
+    article.className = 'project-card';
+
+    const thumb = document.createElement('div');
+    thumb.className = 'project-thumb';
+    thumb.style.backgroundImage = `url(https://opengraph.githubassets.com/1/${repo.full_name})`;
+    thumb.setAttribute('aria-hidden', 'true');
+
+    const name = document.createElement('p');
+    name.className = 'project-name';
+    name.textContent = repo.name;
+
+    const text = document.createElement('p');
+    text.className = 'project-text';
+    text.textContent = repo.description || 'リポジトリの説明はまだ設定されていません';
+
+    const link = document.createElement('a');
+    link.className = 'project-link';
+    link.href = repo.homepage || repo.html_url;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.append('詳細を見る');
+    const arrow = document.createElement('span');
+    arrow.textContent = '→';
+    link.appendChild(arrow);
+
+    article.append(thumb, name, text, link);
+    return article;
+  }
 
   function cardStep() {
+    if (!cards.length) return 0;
     const style = getComputedStyle(track);
     return cards[0].getBoundingClientRect().width + parseFloat(style.columnGap || style.gap || 0);
   }
@@ -160,16 +170,33 @@
   }
 
   function updateActiveDot() {
+    if (!cards.length) return;
     const index = Math.round(track.scrollLeft / cardStep());
     dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
   }
 
+  function setupCarousel() {
+    cards = Array.from(track.querySelectorAll('.project-card'));
+    dotsWrap.innerHTML = '';
+    dots = cards.map((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'dot';
+      dot.setAttribute('aria-label', `${i + 1}枚目の作品を表示`);
+      dot.addEventListener('click', () => scrollToCard(i));
+      dotsWrap.appendChild(dot);
+      return dot;
+    });
+    updateActiveDot();
+  }
+
   prevBtn.addEventListener('click', () => {
+    if (!cards.length) return;
     const index = Math.max(0, Math.round(track.scrollLeft / cardStep()) - 1);
     scrollToCard(index);
   });
 
   nextBtn.addEventListener('click', () => {
+    if (!cards.length) return;
     const index = Math.min(cards.length - 1, Math.round(track.scrollLeft / cardStep()) + 1);
     scrollToCard(index);
   });
@@ -178,7 +205,38 @@
     window.requestAnimationFrame(updateActiveDot);
   });
 
-  updateActiveDot();
+  async function loadProjects() {
+    const res = await fetch(
+      `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`
+    );
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+    const repos = await res.json();
+    return repos.filter(
+      (repo) => !repo.private && !repo.fork && !EXCLUDED_REPOS.has(repo.name)
+    );
+  }
+
+  loadProjects()
+    .then((repos) => {
+      track.innerHTML = '';
+      if (repos.length === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'project-loading';
+        empty.textContent = '公開中のプロジェクトはまだありません。';
+        track.appendChild(empty);
+        return;
+      }
+      repos.forEach((repo) => track.appendChild(createProjectCard(repo)));
+      setupCarousel();
+    })
+    .catch((err) => {
+      console.error(err);
+      track.innerHTML = '';
+      const error = document.createElement('p');
+      error.className = 'project-loading';
+      error.textContent = 'プロジェクト一覧の取得に失敗しました。時間をおいて再度お試しください。';
+      track.appendChild(error);
+    });
 </script>
 
 </body>
