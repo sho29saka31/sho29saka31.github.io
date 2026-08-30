@@ -73,8 +73,11 @@
     <div class="carousel">
       <button class="carousel-btn prev" id="prevBtn" aria-label="前の作品へ">&lsaquo;</button>
 
-      <div class="carousel-track" id="carouselTrack">
-        <p class="project-loading">読み込み中…</p>
+      <div class="carousel-viewport" id="carouselViewport">
+        <div class="carousel-track" id="carouselTrack"></div>
+        <div class="carousel-error" id="carouselError" hidden>
+          <p>プロジェクト一覧の取得に失敗しました。<br>時間をおいて再度お試しください。</p>
+        </div>
       </div>
 
       <button class="carousel-btn next" id="nextBtn" aria-label="次の作品へ">&rsaquo;</button>
@@ -119,14 +122,43 @@
   // --- Product: fetch published repos from GitHub and render as slides ---
   const GITHUB_USERNAME = 'sho29saka31';
   const EXCLUDED_REPOS = new Set(['sho29saka31', 'sho29saka31.github.io', '.github']);
+  const MAX_RETRIES = 2;
+  const RETRY_DELAY_MS = 1200;
+  const SKELETON_COUNT = 3;
 
   const track = document.getElementById('carouselTrack');
+  const carouselError = document.getElementById('carouselError');
   const dotsWrap = document.getElementById('carouselDots');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
   let cards = [];
   let dots = [];
+
+  function createSkeletonCard() {
+    const card = document.createElement('div');
+    card.className = 'project-card skeleton-card';
+    card.setAttribute('aria-hidden', 'true');
+
+    const thumb = document.createElement('div');
+    thumb.className = 'skeleton-block skeleton-thumb';
+
+    const line1 = document.createElement('div');
+    line1.className = 'skeleton-block skeleton-line';
+
+    const line2 = document.createElement('div');
+    line2.className = 'skeleton-block skeleton-line skeleton-line-short';
+
+    card.append(thumb, line1, line2);
+    return card;
+  }
+
+  function renderSkeleton(count = SKELETON_COUNT) {
+    track.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      track.appendChild(createSkeletonCard());
+    }
+  }
 
   function createProjectCard(repo) {
     const article = document.createElement('article');
@@ -205,7 +237,11 @@
     window.requestAnimationFrame(updateActiveDot);
   });
 
-  async function loadProjects() {
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function fetchRepos() {
     const res = await fetch(
       `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`
     );
@@ -216,8 +252,26 @@
     );
   }
 
-  loadProjects()
+  async function loadProjectsWithRetry() {
+    let lastError;
+    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        return await fetchRepos();
+      } catch (err) {
+        lastError = err;
+        if (attempt < MAX_RETRIES) {
+          await sleep(RETRY_DELAY_MS);
+        }
+      }
+    }
+    throw lastError;
+  }
+
+  renderSkeleton();
+
+  loadProjectsWithRetry()
     .then((repos) => {
+      carouselError.hidden = true;
       track.innerHTML = '';
       if (repos.length === 0) {
         const empty = document.createElement('p');
@@ -231,11 +285,8 @@
     })
     .catch((err) => {
       console.error(err);
-      track.innerHTML = '';
-      const error = document.createElement('p');
-      error.className = 'project-loading';
-      error.textContent = 'プロジェクト一覧の取得に失敗しました。時間をおいて再度お試しください。';
-      track.appendChild(error);
+      // スケルトンはそのまま残し、上にエラーメッセージを重ねる
+      carouselError.hidden = false;
     });
 </script>
 
