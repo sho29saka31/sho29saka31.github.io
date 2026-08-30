@@ -6,97 +6,179 @@
 <title>sho29saka31 | ポートフォリオ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="accent-bar"></div>
-
 <header class="site-header">
-  <span class="logo">sho29saka31</span>
-  <nav>
-    <ul>
-      <li><a href="#about">自己紹介</a></li>
-      <li><a href="#projects">プロジェクト</a></li>
-      <li><a href="#contact">お問い合わせ</a></li>
-    </ul>
-  </nav>
+  <h1 class="site-title">sho29saka31&rsquo;s portfolio</h1>
+  <button class="menu-btn" id="menuOpenBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="slideMenu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
-<section class="hero">
-  <div class="hero-text">
-    <p class="eyebrow">Portfolio</p>
-    <h1>ソフトウェアエンジニア、<br>sho29saka31 です。</h1>
-    <p class="lead">コミットを積み重ねながら、ものづくりをしています。</p>
-    <a class="btn" href="https://github.com/sho29saka31" target="_blank" rel="noopener">GitHub プロフィールを見る</a>
-  </div>
-  <div class="avatar" aria-hidden="true">S</div>
-</section>
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="slide-menu" id="slideMenu" aria-hidden="true">
+  <button class="menu-close" id="menuCloseBtn" aria-label="メニューを閉じる">&times;</button>
+  <ul class="menu-list">
+    <li><a href="#about">About</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#product">Product</a></li>
+  </ul>
+</nav>
 
 <main>
-  <section id="about" class="section">
+  <section id="about" class="section section-alt">
     <div class="section-head">
-      <span class="index">01</span>
-      <h2>自己紹介</h2>
+      <h2>About</h2>
+      <span class="section-label">私について</span>
     </div>
-    <p>
-      このサイトは GitHub Pages でホストしている個人サイトです。
-      <code>index.html</code> と <code>style.css</code> を編集して、内容を自由にカスタマイズできます。
-    </p>
-    <ul class="tags">
-      <li>JavaScript</li>
-      <li>TypeScript</li>
-      <li>Python</li>
-      <li>Git</li>
-    </ul>
-  </section>
-
-  <section id="projects" class="section section-alt">
-    <div class="section-head">
-      <span class="index">02</span>
-      <h2>プロジェクト</h2>
-    </div>
-    <div class="cards">
-      <article class="card">
-        <h3>プロジェクト1</h3>
-        <p>ここにプロジェクトの簡単な説明を書きます。</p>
-        <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">見る <span>→</span></a>
-      </article>
-      <article class="card">
-        <h3>プロジェクト2</h3>
-        <p>ここに別のプロジェクトの簡単な説明を書きます。</p>
-        <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">見る <span>→</span></a>
-      </article>
-      <article class="card">
-        <h3>プロジェクト3</h3>
-        <p>ここに別のプロジェクトの簡単な説明を書きます。</p>
-        <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">見る <span>→</span></a>
-      </article>
+    <div class="about-body">
+      <p class="about-name">sho29saka31</p>
+      <div class="about-info">
+        <p class="about-line">愛知県生まれ</p>
+        <p class="about-line">フルスタックエンジニア</p>
+        <p class="about-desc">AIを駆使しながら<br>依頼者の要望に沿ったwebサイト開発を心掛けています</p>
+      </div>
     </div>
   </section>
 
-  <section id="contact" class="section">
+  <section id="tools" class="section">
     <div class="section-head">
-      <span class="index">03</span>
-      <h2>お問い合わせ</h2>
+      <h2>Tools</h2>
+      <span class="section-label">利用する外部サービス</span>
     </div>
-    <p>ご連絡はお気軽にどうぞ。</p>
-    <a class="btn btn-ghost" href="https://github.com/sho29saka31" target="_blank" rel="noopener">
-      <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
-      </svg>
-      GitHub
-    </a>
+    <dl class="tools-body">
+      <div class="tools-row">
+        <dt>UI / UX</dt>
+        <dd>Figma</dd>
+      </div>
+      <div class="tools-row">
+        <dt>DB</dt>
+        <dd>Supabase</dd>
+      </div>
+      <div class="tools-row">
+        <dt>AI</dt>
+        <dd>Claude</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section id="product" class="section section-alt">
+    <div class="section-head">
+      <h2>Product</h2>
+      <span class="section-label">制作物</span>
+    </div>
+
+    <div class="carousel">
+      <button class="carousel-btn prev" id="prevBtn" aria-label="前の作品へ">&lsaquo;</button>
+
+      <div class="carousel-track" id="carouselTrack">
+        <article class="project-card">
+          <div class="project-thumb" aria-hidden="true"></div>
+          <p class="project-name">{project_name}</p>
+          <p class="project-text">{project_text}</p>
+          <a class="project-link" href="#">詳細を見る<span>→</span></a>
+        </article>
+        <article class="project-card">
+          <div class="project-thumb" aria-hidden="true"></div>
+          <p class="project-name">{project_name}</p>
+          <p class="project-text">{project_text}</p>
+          <a class="project-link" href="#">詳細を見る<span>→</span></a>
+        </article>
+        <article class="project-card">
+          <div class="project-thumb" aria-hidden="true"></div>
+          <p class="project-name">{project_name}</p>
+          <p class="project-text">{project_text}</p>
+          <a class="project-link" href="#">詳細を見る<span>→</span></a>
+        </article>
+      </div>
+
+      <button class="carousel-btn next" id="nextBtn" aria-label="次の作品へ">&rsaquo;</button>
+    </div>
+
+    <div class="carousel-dots" id="carouselDots"></div>
   </section>
 </main>
 
 <footer>
-  <p>&copy; <span id="year"></span> sho29saka31</p>
+  <p>&copy; <span id="year"></span> sho29saka31 &middot; <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">GitHub</a></p>
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // slide menu
+  const menuOpenBtn = document.getElementById('menuOpenBtn');
+  const menuCloseBtn = document.getElementById('menuCloseBtn');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const slideMenu = document.getElementById('slideMenu');
+
+  function openMenu() {
+    slideMenu.classList.add('is-open');
+    menuOverlay.classList.add('is-open');
+    menuOpenBtn.setAttribute('aria-expanded', 'true');
+    slideMenu.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeMenu() {
+    slideMenu.classList.remove('is-open');
+    menuOverlay.classList.remove('is-open');
+    menuOpenBtn.setAttribute('aria-expanded', 'false');
+    slideMenu.setAttribute('aria-hidden', 'true');
+  }
+
+  menuOpenBtn.addEventListener('click', openMenu);
+  menuCloseBtn.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click', closeMenu);
+  slideMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
+  // carousel
+  const track = document.getElementById('carouselTrack');
+  const cards = Array.from(track.children);
+  const dotsWrap = document.getElementById('carouselDots');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  cards.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot';
+    dot.setAttribute('aria-label', `${i + 1}枚目の作品を表示`);
+    dot.addEventListener('click', () => scrollToCard(i));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function cardStep() {
+    const style = getComputedStyle(track);
+    return cards[0].getBoundingClientRect().width + parseFloat(style.columnGap || style.gap || 0);
+  }
+
+  function scrollToCard(index) {
+    track.scrollTo({ left: cardStep() * index, behavior: 'smooth' });
+  }
+
+  function updateActiveDot() {
+    const index = Math.round(track.scrollLeft / cardStep());
+    dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+  }
+
+  prevBtn.addEventListener('click', () => {
+    const index = Math.max(0, Math.round(track.scrollLeft / cardStep()) - 1);
+    scrollToCard(index);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    const index = Math.min(cards.length - 1, Math.round(track.scrollLeft / cardStep()) + 1);
+    scrollToCard(index);
+  });
+
+  track.addEventListener('scroll', () => {
+    window.requestAnimationFrame(updateActiveDot);
+  });
+
+  updateActiveDot();
 </script>
 
 </body>
