@@ -156,6 +156,17 @@
   const RETRY_DELAY_MS = 1200;
   const SKELETON_COUNT = 3;
 
+  // リポジトリ名 -> 画像パスの対応表。ここに指定したリポジトリは
+  // GitHubの自動生成OGP画像ではなく指定した画像を表示する。
+  // 未指定のリポジトリは従来どおりOGP画像にフォールバックする。
+  const CUSTOM_THUMBNAILS = {
+    // 'repo-name': './assets/thumbnails/repo-name.png',
+  };
+
+  function getThumbnailUrl(repo) {
+    return CUSTOM_THUMBNAILS[repo.name] || `https://opengraph.githubassets.com/1/${repo.full_name}`;
+  }
+
   const track = document.getElementById('carouselTrack');
   const carouselViewport = document.getElementById('carouselViewport');
   const carouselError = document.getElementById('carouselError');
@@ -172,7 +183,7 @@
   const modalGithubBtn = document.getElementById('modalGithubBtn');
 
   function openProjectModal(repo) {
-    modalThumb.style.backgroundImage = `url(https://opengraph.githubassets.com/1/${repo.full_name})`;
+    modalThumb.style.backgroundImage = `url(${getThumbnailUrl(repo)})`;
     modalName.textContent = repo.name;
     modalText.textContent = repo.description || 'リポジトリの説明はまだ設定されていません';
     modalGithubBtn.href = repo.html_url;
@@ -223,7 +234,7 @@
 
     const thumb = document.createElement('div');
     thumb.className = 'project-thumb';
-    thumb.style.backgroundImage = `url(https://opengraph.githubassets.com/1/${repo.full_name})`;
+    thumb.style.backgroundImage = `url(${getThumbnailUrl(repo)})`;
     thumb.setAttribute('aria-hidden', 'true');
 
     const name = document.createElement('p');
