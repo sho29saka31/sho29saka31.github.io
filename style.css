@@ -437,6 +437,13 @@ main {
   line-height: 1.7;
 }
 
+.modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .modal-github-btn {
   display: inline-flex;
   align-items: center;
@@ -447,6 +454,23 @@ main {
   color: #fff;
   font-weight: 600;
   font-size: 0.95rem;
+}
+
+.modal-site-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 1px solid var(--fg);
+  background: transparent;
+  color: var(--fg);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.modal-site-btn[hidden] {
+  display: none;
 }
 
 .carousel-controls {
