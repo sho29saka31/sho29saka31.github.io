@@ -258,6 +258,17 @@ main {
   background: #ddd;
 }
 
+@media (min-width: 721px) {
+  .carousel-btn {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .carousel-btn:hover {
+    background: var(--card-bg);
+  }
+}
+
 .carousel-viewport {
   position: relative;
   min-width: 0;
