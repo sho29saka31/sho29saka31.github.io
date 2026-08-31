@@ -361,16 +361,6 @@ main {
   font-weight: 600;
 }
 
-.project-text {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-
 .project-link {
   display: inline-flex;
   align-items: center;

@@ -212,10 +212,6 @@
     name.className = 'project-name';
     name.textContent = repo.name;
 
-    const text = document.createElement('p');
-    text.className = 'project-text';
-    text.textContent = repo.description || 'リポジトリの説明はまだ設定されていません';
-
     const moreBtn = document.createElement('button');
     moreBtn.type = 'button';
     moreBtn.className = 'project-link';
@@ -225,7 +221,7 @@
     moreBtn.appendChild(arrow);
     moreBtn.addEventListener('click', () => openProjectModal(repo));
 
-    article.append(thumb, name, text, moreBtn);
+    article.append(thumb, name, moreBtn);
     return article;
   }
 
