@@ -495,6 +495,23 @@ footer a {
   color: var(--fg);
 }
 
+/* version badge */
+
+.version-badge {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  margin: 0;
+  padding: 6px 14px;
+  background: var(--card-bg);
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 999px;
+  z-index: 15;
+  pointer-events: none;
+}
+
 /* responsive */
 
 @media (max-width: 720px) {
