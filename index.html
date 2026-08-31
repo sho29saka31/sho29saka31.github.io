@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sho29saka31 | ポートフォリオ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <h1 class="site-title">sho29saka31&rsquo;s portfolio</h1>
+  <button class="menu-btn" id="menuOpenBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="slideMenu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="slide-menu" id="slideMenu" aria-hidden="true">
+  <button class="menu-close" id="menuCloseBtn" aria-label="メニューを閉じる">&times;</button>
+  <ul class="menu-list">
+    <li><a href="#about">About</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#product">Product</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section id="about" class="section section-alt">
+    <div class="section-head">
+      <h2>About</h2>
+      <span class="section-label">私について</span>
+    </div>
+    <div class="about-body">
+      <p class="about-name">sho29saka31</p>
+      <div class="about-info">
+        <p class="about-line">愛知県生まれ</p>
+        <p class="about-line">フルスタックエンジニア</p>
+        <p class="about-desc">AIを駆使しながら<br>依頼者の要望に沿ったwebサイト開発を心掛けています</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools" class="section">
+    <div class="section-head">
+      <h2>Tools</h2>
+      <span class="section-label">利用する外部サービス</span>
+    </div>
+    <p class="tools-icons">
+      <img src="https://skillicons.dev/icons?i=windows&theme=dark" width="48" height="48" alt="Windows">
+      <img src="https://skillicons.dev/icons?i=git&theme=dark" width="48" height="48" alt="Git">
+      <img src="https://skillicons.dev/icons?i=github&theme=dark" width="48" height="48" alt="GitHub">
+      <img src="https://skillicons.dev/icons?i=githubactions&theme=dark" width="48" height="48" alt="GitHub Actions">
+      <img src="https://skillicons.dev/icons?i=figma&theme=dark" width="48" height="48" alt="Figma">
+      <img src="https://skillicons.dev/icons?i=supabase&theme=dark" width="48" height="48" alt="Supabase">
+      <img src="https://skillicons.dev/icons?i=firebase&theme=dark" width="48" height="48" alt="Firebase">
+      <img src="https://skillicons.dev/icons?i=vercel&theme=dark" width="48" height="48" alt="Vercel">
+      <img src="https://skillicons.dev/icons?i=sentry&theme=dark" width="48" height="48" alt="Sentry">
+      <img src="./assets/icons/claude.svg" width="48" height="48" alt="Claude">
+      <img src="./assets/icons/claude-code.svg" width="48" height="48" alt="Claude Code">
+    </p>
+  </section>
+
+  <section id="product" class="section section-alt">
+    <div class="section-head">
+      <h2>Product</h2>
+      <span class="section-label">制作物</span>
+    </div>
+
+    <div class="carousel-viewport" id="carouselViewport">
+      <div class="carousel-track" id="carouselTrack"></div>
+      <div class="carousel-error" id="carouselError" hidden>
+        <p>プロジェクト一覧の取得に失敗しました。<br>時間をおいて再度お試しください。</p>
+      </div>
+    </div>
+
+    <div class="carousel-controls">
+      <button class="carousel-btn prev" id="prevBtn" aria-label="前の作品へ">&lsaquo;</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <button class="carousel-btn next" id="nextBtn" aria-label="次の作品へ">&rsaquo;</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; <span id="year"></span> sho29saka31 &middot; <a href="https://github.com/sho29saka31" target="_blank" rel="noopener">GitHub</a></p>
+</footer>
+
+<dialog class="project-modal" id="projectModal">
+  <button class="modal-close" id="modalCloseBtn" aria-label="閉じる">&times;</button>
+  <div class="modal-thumb" id="modalThumb" aria-hidden="true"></div>
+  <h3 class="modal-name" id="modalName"></h3>
+  <p class="modal-text" id="modalText"></p>
+  <a class="modal-github-btn" id="modalGithubBtn" target="_blank" rel="noopener">
+    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+    </svg>
+    GitHubで見る
+  </a>
+</dialog>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // slide menu
+  const menuOpenBtn = document.getElementById('menuOpenBtn');
+  const menuCloseBtn = document.getElementById('menuCloseBtn');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const slideMenu = document.getElementById('slideMenu');
+
+  function openMenu() {
+    slideMenu.classList.add('is-open');
+    menuOverlay.classList.add('is-open');
+    menuOpenBtn.setAttribute('aria-expanded', 'true');
+    slideMenu.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeMenu() {
+    slideMenu.classList.remove('is-open');
+    menuOverlay.classList.remove('is-open');
+    menuOpenBtn.setAttribute('aria-expanded', 'false');
+    slideMenu.setAttribute('aria-hidden', 'true');
+  }
+
+  menuOpenBtn.addEventListener('click', openMenu);
+  menuCloseBtn.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click', closeMenu);
+  slideMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
+  // --- Product: fetch published repos from GitHub and render as slides ---
+  const GITHUB_USERNAME = 'sho29saka31';
+  const EXCLUDED_REPOS = new Set(['sho29saka31', 'sho29saka31.github.io', '.github']);
+  const MAX_RETRIES = 2;
+  const RETRY_DELAY_MS = 1200;
+  const SKELETON_COUNT = 3;
+
+  const track = document.getElementById('carouselTrack');
+  const carouselViewport = document.getElementById('carouselViewport');
+  const carouselError = document.getElementById('carouselError');
+  const dotsWrap = document.getElementById('carouselDots');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  // detail modal
+  const projectModal = document.getElementById('projectModal');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const modalThumb = document.getElementById('modalThumb');
+  const modalName = document.getElementById('modalName');
+  const modalText = document.getElementById('modalText');
+  const modalGithubBtn = document.getElementById('modalGithubBtn');
+
+  function openProjectModal(repo) {
+    modalThumb.style.backgroundImage = `url(https://opengraph.githubassets.com/1/${repo.full_name})`;
+    modalName.textContent = repo.name;
+    modalText.textContent = repo.description || 'リポジトリの説明はまだ設定されていません';
+    modalGithubBtn.href = repo.html_url;
+    projectModal.showModal();
+  }
+
+  modalCloseBtn.addEventListener('click', () => projectModal.close());
+
+  // ダイアログの外側(backdrop)をクリックしたら閉じる
+  projectModal.addEventListener('click', (e) => {
+    const rect = projectModal.getBoundingClientRect();
+    const inDialog =
+      rect.top <= e.clientY &&
+      e.clientY <= rect.top + rect.height &&
+      rect.left <= e.clientX &&
+      e.clientX <= rect.left + rect.width;
+    if (!inDialog) projectModal.close();
+  });
+
+  let cards = [];
+  let dots = [];
+
+  function createSkeletonCard() {
+    const card = document.createElement('div');
+    card.className = 'project-card skeleton-card';
+    card.setAttribute('aria-hidden', 'true');
+
+    const thumb = document.createElement('div');
+    thumb.className = 'skeleton-block skeleton-thumb';
+
+    const line1 = document.createElement('div');
+    line1.className = 'skeleton-block skeleton-line';
+
+    card.append(thumb, line1);
+    return card;
+  }
+
+  function renderSkeleton(count = SKELETON_COUNT) {
+    track.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      track.appendChild(createSkeletonCard());
+    }
+  }
+
+  function createProjectCard(repo) {
+    const article = document.createElement('article');
+    article.className = 'project-card';
+
+    const thumb = document.createElement('div');
+    thumb.className = 'project-thumb';
+    thumb.style.backgroundImage = `url(https://opengraph.githubassets.com/1/${repo.full_name})`;
+    thumb.setAttribute('aria-hidden', 'true');
+
+    const name = document.createElement('p');
+    name.className = 'project-name';
+    name.textContent = repo.name;
+
+    const moreBtn = document.createElement('button');
+    moreBtn.type = 'button';
+    moreBtn.className = 'project-link';
+    moreBtn.append('詳しく見る');
+    const arrow = document.createElement('span');
+    arrow.textContent = '→';
+    moreBtn.appendChild(arrow);
+    moreBtn.addEventListener('click', () => openProjectModal(repo));
+
+    article.append(thumb, name, moreBtn);
+    return article;
+  }
+
+  function cardStep() {
+    if (!cards.length) return 0;
+    const style = getComputedStyle(track);
+    return cards[0].getBoundingClientRect().width + parseFloat(style.columnGap || style.gap || 0);
+  }
+
+  const MOBILE_BREAKPOINT = 720;
+  const MOBILE_PEEK = 22; // スマホ表示で両隣のカードの角がのぞく幅(px)
+
+  // スマホではviewport幅基準の固定px幅にする(trackのpaddingに連動して
+  // 幅が変わってしまうcalc(100%-...)は使わない)
+  function applyResponsiveCardWidth() {
+    if (!cards.length) return;
+    if (window.innerWidth <= MOBILE_BREAKPOINT) {
+      const width = Math.max(0, carouselViewport.clientWidth - MOBILE_PEEK * 2);
+      cards.forEach((card) => {
+        card.style.width = `${width}px`;
+      });
+    } else {
+      cards.forEach((card) => {
+        card.style.width = '';
+      });
+    }
+  }
+
+  // 最初と最後のカードも中央に来られるよう、trackの左右に余白を作る
+  function updateTrackPadding() {
+    if (!cards.length) return;
+    const viewportWidth = track.clientWidth;
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    const pad = Math.max(0, (viewportWidth - cardWidth) / 2);
+    track.style.paddingLeft = `${pad}px`;
+    track.style.paddingRight = `${pad}px`;
+  }
+
+  function scrollToCard(index, behavior = 'smooth') {
+    track.scrollTo({ left: cardStep() * index, behavior });
+  }
+
+  function currentIndex() {
+    const idx = cards.findIndex((card) => card.classList.contains('is-current'));
+    return idx === -1 ? 0 : idx;
+  }
+
+  // ビューポート中央に最も近いカードを「中央のカード」として判定する
+  function updateCurrentCard() {
+    if (!cards.length) return;
+    const trackRect = track.getBoundingClientRect();
+    const centerX = trackRect.left + trackRect.width / 2;
+    let closestIndex = 0;
+    let closestDist = Infinity;
+    cards.forEach((card, i) => {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const dist = Math.abs(cardCenter - centerX);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closestIndex = i;
+      }
+    });
+    cards.forEach((card, i) => card.classList.toggle('is-current', i === closestIndex));
+    dots.forEach((dot, i) => dot.classList.toggle('is-active', i === closestIndex));
+  }
+
+  function setupCarousel() {
+    cards = Array.from(track.querySelectorAll('.project-card'));
+    dotsWrap.innerHTML = '';
+    dots = cards.map((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'dot';
+      dot.setAttribute('aria-label', `${i + 1}枚目の作品を表示`);
+      dot.addEventListener('click', () => scrollToCard(i));
+      dotsWrap.appendChild(dot);
+      return dot;
+    });
+    applyResponsiveCardWidth();
+    updateTrackPadding();
+    scrollToCard(0, 'auto');
+    updateCurrentCard();
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (!cards.length) return;
+    scrollToCard(Math.max(0, currentIndex() - 1));
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (!cards.length) return;
+    scrollToCard(Math.min(cards.length - 1, currentIndex() + 1));
+  });
+
+  track.addEventListener('scroll', () => {
+    window.requestAnimationFrame(updateCurrentCard);
+  });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (!cards.length) return;
+      const idx = currentIndex();
+      applyResponsiveCardWidth();
+      updateTrackPadding();
+      scrollToCard(idx, 'auto');
+    }, 150);
+  });
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function fetchRepos() {
+    const res = await fetch(
+      `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`
+    );
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+    const repos = await res.json();
+    return repos.filter(
+      (repo) => !repo.private && !repo.fork && !EXCLUDED_REPOS.has(repo.name)
+    );
+  }
+
+  async function loadProjectsWithRetry() {
+    let lastError;
+    for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        return await fetchRepos();
+      } catch (err) {
+        lastError = err;
+        if (attempt < MAX_RETRIES) {
+          await sleep(RETRY_DELAY_MS);
+        }
+      }
+    }
+    throw lastError;
+  }
+
+  renderSkeleton();
+
+  loadProjectsWithRetry()
+    .then((repos) => {
+      carouselError.hidden = true;
+      track.innerHTML = '';
+      if (repos.length === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'project-loading';
+        empty.textContent = '公開中のプロジェクトはまだありません。';
+        track.appendChild(empty);
+        return;
+      }
+      repos.forEach((repo) => track.appendChild(createProjectCard(repo)));
+      setupCarousel();
+    })
+    .catch((err) => {
+      console.error(err);
+      // スケルトンはそのまま残し、上にエラーメッセージを重ねる
+      carouselError.hidden = false;
+    });
+</script>
+
+</body>
+</html>
