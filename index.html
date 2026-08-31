@@ -132,7 +132,7 @@
 
   // --- Product: fetch published repos from GitHub and render as slides ---
   const GITHUB_USERNAME = 'sho29saka31';
-  const EXCLUDED_REPOS = new Set(['sho29saka31', 'sho29saka31.github.io', '.github']);
+  const EXCLUDED_REPOS = new Set(['sho29saka31', '.github']);
   const MAX_RETRIES = 2;
   const RETRY_DELAY_MS = 1200;
   const SKELETON_COUNT = 3;
@@ -342,7 +342,7 @@
     if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
     const repos = await res.json();
     return repos.filter(
-      (repo) => !repo.private && !repo.fork && !EXCLUDED_REPOS.has(repo.name)
+      (repo) => !repo.private && !repo.fork && !repo.archived && !EXCLUDED_REPOS.has(repo.name)
     );
   }
 
