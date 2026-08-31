@@ -504,6 +504,26 @@ main {
   transform: scale(1.15);
 }
 
+/* contact */
+
+.contact-text {
+  margin: 0 0 32px;
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+  font-weight: 500;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  background: var(--fg);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
 /* footer */
 
 footer {
