@@ -290,6 +290,8 @@ main {
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-thumb {
@@ -321,11 +323,6 @@ main {
 .skeleton-line {
   height: 14px;
   border-radius: 4px;
-  margin-bottom: 10px;
-}
-
-.skeleton-line-short {
-  width: 60%;
   margin-bottom: 0;
 }
 
@@ -368,15 +365,29 @@ main {
   margin: 0;
   color: var(--muted);
   font-size: 0.95rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .project-link {
   display: inline-flex;
   align-items: center;
+  align-self: flex-end;
   gap: 4px;
-  margin-top: 20px;
+  margin-top: auto;
+  padding-top: 20px;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
   font-weight: 700;
   font-size: 0.95rem;
+  color: inherit;
+  cursor: pointer;
 }
 
 .project-link span {
@@ -385,6 +396,65 @@ main {
 
 .project-link:hover span {
   transform: translateX(4px);
+}
+
+/* project detail modal */
+
+.project-modal {
+  border: none;
+  border-radius: var(--radius);
+  padding: 28px;
+  width: min(420px, calc(100vw - 48px));
+  background: #fff;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+}
+
+.project-modal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-close {
+  display: block;
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--fg);
+}
+
+.modal-thumb {
+  aspect-ratio: 1 / 1;
+  background: var(--bg-alt) center / cover no-repeat;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.modal-name {
+  margin: 0 0 12px;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.modal-text {
+  margin: 0 0 28px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.modal-github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  background: var(--fg);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .carousel-dots {
