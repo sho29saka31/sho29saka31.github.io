@@ -296,12 +296,6 @@ main {
   }
 }
 
-@media (max-width: 720px) {
-  .project-card {
-    width: calc(100% - 44px);
-  }
-}
-
 .project-thumb {
   aspect-ratio: 1 / 1;
   background: #fff center / cover no-repeat;

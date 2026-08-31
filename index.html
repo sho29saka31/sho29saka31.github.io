@@ -138,6 +138,7 @@
   const SKELETON_COUNT = 3;
 
   const track = document.getElementById('carouselTrack');
+  const carouselViewport = document.getElementById('carouselViewport');
   const carouselError = document.getElementById('carouselError');
   const dotsWrap = document.getElementById('carouselDots');
   const prevBtn = document.getElementById('prevBtn');
@@ -229,6 +230,25 @@
     return cards[0].getBoundingClientRect().width + parseFloat(style.columnGap || style.gap || 0);
   }
 
+  const MOBILE_BREAKPOINT = 720;
+  const MOBILE_PEEK = 22; // スマホ表示で両隣のカードの角がのぞく幅(px)
+
+  // スマホではviewport幅基準の固定px幅にする(trackのpaddingに連動して
+  // 幅が変わってしまうcalc(100%-...)は使わない)
+  function applyResponsiveCardWidth() {
+    if (!cards.length) return;
+    if (window.innerWidth <= MOBILE_BREAKPOINT) {
+      const width = Math.max(0, carouselViewport.clientWidth - MOBILE_PEEK * 2);
+      cards.forEach((card) => {
+        card.style.width = `${width}px`;
+      });
+    } else {
+      cards.forEach((card) => {
+        card.style.width = '';
+      });
+    }
+  }
+
   // 最初と最後のカードも中央に来られるよう、trackの左右に余白を作る
   function updateTrackPadding() {
     if (!cards.length) return;
@@ -279,6 +299,7 @@
       dotsWrap.appendChild(dot);
       return dot;
     });
+    applyResponsiveCardWidth();
     updateTrackPadding();
     scrollToCard(0, 'auto');
     updateCurrentCard();
@@ -304,6 +325,7 @@
     resizeTimer = setTimeout(() => {
       if (!cards.length) return;
       const idx = currentIndex();
+      applyResponsiveCardWidth();
       updateTrackPadding();
       scrollToCard(idx, 'auto');
     }, 150);
