@@ -229,14 +229,43 @@
     return cards[0].getBoundingClientRect().width + parseFloat(style.columnGap || style.gap || 0);
   }
 
-  function scrollToCard(index) {
-    track.scrollTo({ left: cardStep() * index, behavior: 'smooth' });
+  // 最初と最後のカードも中央に来られるよう、trackの左右に余白を作る
+  function updateTrackPadding() {
+    if (!cards.length) return;
+    const viewportWidth = track.clientWidth;
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    const pad = Math.max(0, (viewportWidth - cardWidth) / 2);
+    track.style.paddingLeft = `${pad}px`;
+    track.style.paddingRight = `${pad}px`;
   }
 
-  function updateActiveDot() {
+  function scrollToCard(index, behavior = 'smooth') {
+    track.scrollTo({ left: cardStep() * index, behavior });
+  }
+
+  function currentIndex() {
+    const idx = cards.findIndex((card) => card.classList.contains('is-current'));
+    return idx === -1 ? 0 : idx;
+  }
+
+  // ビューポート中央に最も近いカードを「中央のカード」として判定する
+  function updateCurrentCard() {
     if (!cards.length) return;
-    const index = Math.round(track.scrollLeft / cardStep());
-    dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+    const trackRect = track.getBoundingClientRect();
+    const centerX = trackRect.left + trackRect.width / 2;
+    let closestIndex = 0;
+    let closestDist = Infinity;
+    cards.forEach((card, i) => {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const dist = Math.abs(cardCenter - centerX);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closestIndex = i;
+      }
+    });
+    cards.forEach((card, i) => card.classList.toggle('is-current', i === closestIndex));
+    dots.forEach((dot, i) => dot.classList.toggle('is-active', i === closestIndex));
   }
 
   function setupCarousel() {
@@ -250,23 +279,34 @@
       dotsWrap.appendChild(dot);
       return dot;
     });
-    updateActiveDot();
+    updateTrackPadding();
+    scrollToCard(0, 'auto');
+    updateCurrentCard();
   }
 
   prevBtn.addEventListener('click', () => {
     if (!cards.length) return;
-    const index = Math.max(0, Math.round(track.scrollLeft / cardStep()) - 1);
-    scrollToCard(index);
+    scrollToCard(Math.max(0, currentIndex() - 1));
   });
 
   nextBtn.addEventListener('click', () => {
     if (!cards.length) return;
-    const index = Math.min(cards.length - 1, Math.round(track.scrollLeft / cardStep()) + 1);
-    scrollToCard(index);
+    scrollToCard(Math.min(cards.length - 1, currentIndex() + 1));
   });
 
   track.addEventListener('scroll', () => {
-    window.requestAnimationFrame(updateActiveDot);
+    window.requestAnimationFrame(updateCurrentCard);
+  });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (!cards.length) return;
+      const idx = currentIndex();
+      updateTrackPadding();
+      scrollToCard(idx, 'auto');
+    }, 150);
   });
 
   function sleep(ms) {

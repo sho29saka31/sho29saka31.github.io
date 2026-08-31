@@ -258,17 +258,6 @@ main {
   background: #ddd;
 }
 
-@media (min-width: 721px) {
-  .carousel-btn {
-    opacity: 0.35;
-    pointer-events: none;
-  }
-
-  .carousel-btn:hover {
-    background: var(--card-bg);
-  }
-}
-
 .carousel-viewport {
   position: relative;
   min-width: 0;
@@ -289,13 +278,28 @@ main {
 
 .project-card {
   flex: 0 0 auto;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   width: min(300px, 78vw);
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 24px;
   display: flex;
   flex-direction: column;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+@media (min-width: 721px) {
+  .project-card:not(.is-current) {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .project-card {
+    width: calc(100% - 44px);
+  }
 }
 
 .project-thumb {
